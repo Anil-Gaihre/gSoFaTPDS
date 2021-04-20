@@ -1,0 +1,56 @@
+#!/bin/bash
+### Begin BSUB Options
+#BSUB -P CSC289
+#BSUB -J 6nodeVaryChunk
+#BSUB -W 02:00
+#BSUB -nnodes 6
+#BSUB -alloc_flags "smt1"
+### End BSUB Options and begin shell commands
+module load cuda
+#exe=./mpi_cuda_test.bin
+# p0=0
+# p1=0
+# b=1 
+# NProcess=264
+  
+N_node=6		
+N_gpu_node=6
+N_process_node=1
+chunk_size=256
+# N_rows=42
+# N_columns=44
+# jsrun --smpiargs="-async" --nrs $N_node --tasks_per_rs 1 --cpu_per_rs 1 --gpu_per_rs $N_gpu_node --rs_per_host 1 ./mpi_cuda_test.bin /gpfs/alpine/proj-shared/csc289/symbolic/super_dump/superlu_dist-master/EXAMPLE/colbeg_659033.dat /gpfs/alpine/proj-shared/csc289/symbolic/super_dump/superlu_dist-master/EXAMPLE/colend_659033.dat /gpfs/alpine/proj-shared/csc289/symbolic/super_dump/superlu_dist-master/EXAMPLE/csr_659033.dat $N_node 128 0 0 1 6 512 >> Pre2_NSUP_128_N_node_1_scaling_test3
+
+ 
+# #BB
+#   nvprof --log-file nvprof_dram_read_write_throughput"%p".log --profile-child-processes --metrics dram_read_throughput --metrics dram_write_throughput jsrun --smpiargs="-async" --nrs $N_node --tasks_per_rs 1 --cpu_per_rs 1 --gpu_per_rs $N_gpu_node --rs_per_host 1 ./mpi_cuda_test.bin /ccs/home/anil/datasets/colbeg_38744.dat /ccs/home/anil/datasets/colend_38744.dat /ccs/home/anil/datasets/csr_38744.dat $N_node 128 0 0 1 $N_gpu_node 512 >> BB_NSUP_128_N_GPU_1_scaling
+ jsrun --smpiargs="-async" --nrs $N_node --tasks_per_rs 1 --cpu_per_rs 1 --gpu_per_rs $N_gpu_node --rs_per_host 1 ./mpi_cuda_test.bin /ccs/home/anil/datasets/colbeg_38744.dat /ccs/home/anil/datasets/colend_38744.dat /ccs/home/anil/datasets/csr_38744.dat $N_node $chunk_size 0 0 1 $N_gpu_node 512 >> ChunkSizeBB256_6node.dat
+# #BC
+ jsrun --smpiargs="-async" --nrs $N_node --tasks_per_rs 1 --cpu_per_rs 1 --gpu_per_rs $N_gpu_node --rs_per_host 1 ./mpi_cuda_test.bin /ccs/home/anil/datasets/colbeg_11948.dat /ccs/home/anil/datasets/colend_11948.dat /ccs/home/anil/datasets/csr_11948.dat $N_node $chunk_size 0 0 1 $N_gpu_node 512 >> ChunkSizeBC256_6node.dat
+# #EP
+ jsrun --smpiargs="-async" --nrs $N_node --tasks_per_rs 1 --cpu_per_rs 1 --gpu_per_rs $N_gpu_node --rs_per_host 1 ./mpi_cuda_test.bin /ccs/home/anil/datasets/colbeg_25228.dat /ccs/home/anil/datasets/colend_25228.dat /ccs/home/anil/datasets/csr_25228.dat $N_node $chunk_size 0 0 1 $N_gpu_node 512 >> ChunkSizeEP256_6node.dat
+# #G7
+ jsrun --smpiargs="-async" --nrs $N_node --tasks_per_rs 1 --cpu_per_rs 1 --gpu_per_rs $N_gpu_node --rs_per_host 1 ./mpi_cuda_test.bin /ccs/home/anil/datasets/colbeg_59310.dat /ccs/home/anil/datasets/colend_59310.dat /ccs/home/anil/datasets/csr_59310.dat $N_node $chunk_size 0 0 1 $N_gpu_node 512 >> ChunkSizeG7256_6node.dat
+# #LH
+ jsrun --smpiargs="-async" --nrs $N_node --tasks_per_rs 1 --cpu_per_rs 1 --gpu_per_rs $N_gpu_node --rs_per_host 1 ./mpi_cuda_test.bin /ccs/home/anil/datasets/colbeg_70304.dat /ccs/home/anil/datasets/colend_70304.dat /ccs/home/anil/datasets/csr_70304.dat $N_node $chunk_size 0 0 1 $N_gpu_node 512 >> ChunkSizeLH256_6node.dat
+# #MK
+ jsrun --smpiargs="-async" --nrs $N_node --tasks_per_rs 1 --cpu_per_rs 1 --gpu_per_rs $N_gpu_node --rs_per_host 1 ./mpi_cuda_test.bin /ccs/home/anil/datasets/colbeg_64089.dat /ccs/home/anil/datasets/colend_64089.dat /ccs/home/anil/datasets/csr_64089.dat $N_node $chunk_size 0 0 1 $N_gpu_node 512 >> ChunkSizeMK256_6node.dat
+# # #RM
+ jsrun --smpiargs="-async" --nrs $N_node --tasks_per_rs 1 --cpu_per_rs 1 --gpu_per_rs $N_gpu_node --rs_per_host 1 ./mpi_cuda_test.bin /ccs/home/anil/superlu_dist/EXAMPLE/colbeg_46835.dat /ccs/home/anil/superlu_dist/EXAMPLE/colend_46835.dat /ccs/home/anil/superlu_dist/EXAMPLE/csr_46835.dat $N_node $chunk_size 0 0 1 $N_gpu_node 512 >> ChunkSizeRM256_6node.dat
+# # #AU
+ jsrun --smpiargs="-async" --nrs $N_node --tasks_per_rs 1 --cpu_per_rs 1 --gpu_per_rs $N_gpu_node --rs_per_host 1 ./mpi_cuda_test.bin /ccs/home/anil/datasets/colbeg_943695.dat /ccs/home/anil/datasets/colend_943695.dat /ccs/home/anil/datasets/csr_943695.dat $N_node $chunk_size 0 0 1 $N_gpu_node 512 >> ChunkSizeAU256_6node.dat
+
+
+# #DI
+ jsrun --smpiargs="-async" --nrs $N_node --tasks_per_rs 1 --cpu_per_rs 1 --gpu_per_rs $N_gpu_node --rs_per_host 1 ./mpi_cuda_test.bin /ccs/home/anil/datasets/colbeg_1157456.dat /ccs/home/anil/datasets/colend_1157456.dat /ccs/home/anil/datasets/csr_1157456.dat $N_node $chunk_size 0 0 1 $N_gpu_node 128 >> ChunkSizeDI256_6node.dat
+# #G3
+ #jsrun --smpiargs="-async" --nrs $N_node --tasks_per_rs 1 --cpu_per_rs 1 --gpu_per_rs $N_gpu_node --rs_per_host 1 ./mpi_cuda_test.bin /gpfs/alpine/proj-shared/csc289/symbolic/super_dump/superlu_dist-master/EXAMPLE/other_datasets/colbeg_1585478.dat /gpfs/alpine/proj-shared/csc289/symbolic/super_dump/superlu_dist-master/EXAMPLE/other_datasets/colend_1585478.dat /gpfs/alpine/proj-shared/csc289/symbolic/super_dump/superlu_dist-master/EXAMPLE/other_datasets/csr_1585478.dat $N_node $chunk_size 0 0 1 $N_gpu_node 128 >> G3_NSUP_128_N_node_1_scaling
+# #HM
+ jsrun --smpiargs="-async" --nrs $N_node --tasks_per_rs 1 --cpu_per_rs 1 --gpu_per_rs $N_gpu_node --rs_per_host 1 ./mpi_cuda_test.bin /ccs/home/anil/superlu_dist/EXAMPLE/colbeg_1447360.dat /ccs/home/anil/superlu_dist/EXAMPLE/colend_1447360.dat /ccs/home/anil/superlu_dist/EXAMPLE/csr_1447360.dat $N_node $chunk_size 0 0 1 $N_gpu_node 128 >> ChunkSizeHM256_6node.dat
+# # #PR
+ jsrun --smpiargs="-async" --nrs $N_node --tasks_per_rs 1 --cpu_per_rs 1 --gpu_per_rs $N_gpu_node --rs_per_host 1 ./mpi_cuda_test.bin /ccs/home/anil/superlu_dist/EXAMPLE/colbeg_659033.dat /ccs/home/anil/superlu_dist/EXAMPLE/colend_659033.dat /ccs/home/anil/superlu_dist/EXAMPLE/csr_659033.dat $N_node $chunk_size 0 0 1 $N_gpu_node 512 >> ChunkSizePR256_6node.dat
+#ST
+ jsrun --smpiargs="-async" --nrs $N_node --tasks_per_rs 1 --cpu_per_rs 1 --gpu_per_rs $N_gpu_node --rs_per_host 1 ./mpi_cuda_test.bin /ccs/home/anil/datasets/colbeg_213360.dat /ccs/home/anil/datasets/colend_213360.dat /ccs/home/anil/datasets/csr_213360.dat $N_node $chunk_size 0 0 1 $N_gpu_node 512 >> ChunkSizeST256_6node.dat
+# #TT
+ jsrun --smpiargs="-async" --nrs $N_node --tasks_per_rs 1 --cpu_per_rs 1 --gpu_per_rs $N_gpu_node --rs_per_host 1 ./mpi_cuda_test.bin /ccs/home/anil/superlu_dist/EXAMPLE/colbeg_120750.dat /ccs/home/anil/superlu_dist/EXAMPLE/colend_120750.dat /ccs/home/anil/superlu_dist/EXAMPLE/csr_120750.dat $N_node $chunk_size 0 0 1 $N_gpu_node 512 >> ChunkSizeTT256_6node.dat
+
