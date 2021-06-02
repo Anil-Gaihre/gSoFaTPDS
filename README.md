@@ -33,11 +33,11 @@ We dump the reordered matrix from SuperLU_DIST solver to CSR files. An example d
 Code specification
 ---------
 
-**Without_space_optimization:**
+**gSoFa_SOAComparison:**
 Consists of the code that doesn't do space optimization. 
 Compile: make
 Run: make test
-A sample job script "run_6_node_VaryChunk128.lsf" is in the "gSoFa_SOAComparison" folder to run on 6 summit nodes for different datasets. The example dataset PR could be used for testing. Please contact if you wish to check all the listed datasets in the paper.
+A sample job script "run_6_node_VaryChunk128.lsf" is in the "gSoFa_SOAComparison" folder to run on 6 summit nodes for different datasets. The example dataset PR could be used for testing. Please contact if you wish to check all the listed datasets in the paper. Note, this version will maximize the performance gain and doesn't compromise it to save the space.
 
 
 **With_space_optimization:**
