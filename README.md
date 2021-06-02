@@ -52,9 +52,9 @@ The overall code structure in each folder is:
 
 - main.cu: main function.
 
--symbfact.cuh: computes symbolic factorization
+- symbfact.cuh: computes symbolic factorization
 
--barrier.cuh: Consists of software barrier
+- barrier.cuh: Consists of software barrier
 
 - wtime.h: timing.
 
