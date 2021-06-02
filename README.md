@@ -6,7 +6,7 @@ Compilation flag: -O3
 --
 Hardware (tested)
 ------
-V100 (tested),  OLCF Summit Supercomputers 
+V100 GPUs at OLCF Summit Supercomputers 
 
 --
 Compile
